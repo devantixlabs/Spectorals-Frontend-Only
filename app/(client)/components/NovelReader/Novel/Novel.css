@@ -1,0 +1,8 @@
+.progressBar[value]::-webkit-progress-value   {
+	  background-color: #CFFF04;
+}
+
+.progressBar[value]::-webkit-progress-bar   {
+	  background-color: #0A0A0A;
+		height: 5px;
+}

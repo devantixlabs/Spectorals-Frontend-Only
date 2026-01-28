@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./*"],
+			"@common/*": ["./app/common/*"],
+			"@clientComponents/*": ["./app/(client)/components/*"],
+			"@adminComponents/*": ["./app/(admin)/components/*"],
+			"@images/*": ["./public/assets/images/*"],
+			"@lib/*": ["./app/(client)/lib/*"],
+			"@hooks/*": ["./app/(client)/hooks/*"]
+		},
+    "target": "ES2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true,
+    "incremental": true,
+    "module": "esnext",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx"
+, "app/(client)/components/Drawers/Drawer.jsx"  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

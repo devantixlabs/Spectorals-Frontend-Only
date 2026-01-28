@@ -1,0 +1,25 @@
+{
+  "tabWidth": 2,
+	"useTabs": true,
+  "semi": true,
+  "singleQuote": true,
+  "singleAttributePerLine": true,
+	"rangeEnd": 70,
+  "endOfLine": "crlf",
+  "plugins": [
+    "@trivago/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss"
+  ],
+  "importOrder": [
+    "use client",
+    "use server",
+    "^react$",
+    "<THIRD_PARTY_MODULES>",
+    "^common/(.*)",
+		"^@clientComponents/(.*)",
+    "^components",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
+}
