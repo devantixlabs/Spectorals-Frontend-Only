@@ -12,6 +12,7 @@ export default function RegistrationForm() {
 	const [showPassword, setShowPassword] = useState(false);
 	const [formState, setFormState] = useState({
 		name: '',
+		username: '',
 		email: '',
 		password: '',
 		agreeToTerms: false,
@@ -33,7 +34,7 @@ export default function RegistrationForm() {
 	return (
 		<div className="flex h-screen">
 			{/* Left side - Scrollable Form */}
-			<div className="scrollbar-hide w-full overflow-y-auto bg-body px-8 py-14 md:w-1/2 md:px-20 md:py-20">
+			<div className="w-full px-8 overflow-y-auto scrollbar-hide bg-body py-13 md:w-1/2 md:px-20 md:py-20">
 				<div className="mb-8">
 					<h2 className="mb-6 text-3xl font-bold text-white">
 						Get Started Now!
@@ -59,7 +60,27 @@ export default function RegistrationForm() {
 							value={formState.name}
 							onChange={handleInputChange}
 							placeholder="Enter your name..."
-							className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2 text-white transition-all focus:outline-none focus:ring-1 focus:ring-gray-500"
+							className="w-full px-3 py-2 text-white transition-all border rounded-md border-zinc-700 bg-zinc-800 focus:outline-none focus:ring-1 focus:ring-gray-500"
+							required
+						/>
+					</div>
+
+					{/* Username */}
+					<div className="space-y-2">
+						<label
+							htmlFor="username"
+							className="block text-sm font-medium text-white"
+						>
+							Username
+						</label>
+						<input
+							id="username"
+							name="username"
+							type="text"
+							value={formState.username}
+							onChange={handleInputChange}
+							placeholder="Enter your username..."
+							className="w-full px-3 py-2 text-white transition-all border rounded-md border-zinc-700 bg-zinc-800 focus:outline-none focus:ring-1 focus:ring-gray-500"
 							required
 						/>
 					</div>
@@ -79,7 +100,7 @@ export default function RegistrationForm() {
 							value={formState.email}
 							onChange={handleInputChange}
 							placeholder="Enter your email..."
-							className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2 text-white transition-all focus:outline-none focus:ring-1 focus:ring-gray-500"
+							className="w-full px-3 py-2 text-white transition-all border rounded-md border-zinc-700 bg-zinc-800 focus:outline-none focus:ring-1 focus:ring-gray-500"
 							required
 						/>
 					</div>
@@ -100,7 +121,7 @@ export default function RegistrationForm() {
 								value={formState.password}
 								onChange={handleInputChange}
 								placeholder="••••••••"
-								className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2 text-white transition-all focus:outline-none focus:ring-1 focus:ring-gray-500"
+								className="w-full px-3 py-2 text-white transition-all border rounded-md border-zinc-700 bg-zinc-800 focus:outline-none focus:ring-1 focus:ring-gray-500"
 								required
 							/>
 							<button
@@ -151,11 +172,11 @@ export default function RegistrationForm() {
 							<div className="w-full border-t border-gray-700"></div>
 						</div>
 						<div className="relative flex justify-center text-sm">
-							<span className="bg-body px-2 text-gray-400">Or</span>
+							<span className="px-2 text-gray-400 bg-body">Or</span>
 						</div>
 					</div>
 
-					<div className="mx-4 mt-6 grid grid-cols-2 gap-6">
+					<div className="grid grid-cols-2 gap-6 mx-4 mt-6">
 						<button
 							type="button"
 							className="flex items-center justify-center gap-2 rounded-[10px] border border-[#D9D9D9] px-6 py-4 text-sm font-medium text-white"
@@ -165,7 +186,7 @@ export default function RegistrationForm() {
 								alt=""
 								height={100}
 								width={100}
-								className="h-6 w-6"
+								className="w-6 h-6"
 							/>
 							Google
 						</button>
@@ -179,14 +200,14 @@ export default function RegistrationForm() {
 								alt=""
 								height={100}
 								width={100}
-								className="h-6 w-6"
+								className="w-6 h-6"
 							/>
 							Apple
 						</button>
 					</div>
 				</div>
 
-				<p className="mt-8 text-center text-sm text-gray-400">
+				<p className="mt-8 text-sm text-center text-gray-400">
 					Have an account?{' '}
 					<Link
 						href="/login"
@@ -205,7 +226,7 @@ export default function RegistrationForm() {
 						alt="Superhero illustration"
 						width={600}
 						height={800}
-						className="h-full w-full object-cover"
+						className="object-cover w-full h-full"
 						priority
 					/>
 				</div>

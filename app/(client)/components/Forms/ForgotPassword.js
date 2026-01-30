@@ -60,7 +60,7 @@ export default function ForgotPasswordForm() {
 				</form>
 
 				{/* Submit and Link at bottom */}
-				<div className="pb-20 mt-auto mb-20 space-y-4">
+				<div className="mt-auto mb-20 space-y-4 pb-11">
 					<button
 						onClick={handleSubmit}
 						className="w-full rounded-md bg-primary px-4 py-2.5 font-medium text-black transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-lime-300 focus:ring-offset-2 focus:ring-offset-zinc-900"

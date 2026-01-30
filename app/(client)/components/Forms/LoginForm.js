@@ -32,16 +32,16 @@ export default function LoginForm() {
 	return (
 		<div className="flex h-screen overflow-hidden">
 			{/* Left - Form */}
-			<div className="scrollbar-hide w-full overflow-y-auto px-[100px] py-14 md:w-1/2 md:py-20">
+			<div className="w-full px-6 overflow-y-auto md:px-20 scrollbar-hide py-14 md:w-1/2 md:py-20">
 				<div className="mb-10">
-					<div className="mb-12 flex items-center justify-center">
-						<div className="md:w-2/3">
+					<div className="flex items-center justify-center mb-12">
+						<div className="w-2/3">
 							<Image
 								src="/assets/images/logos/logoipsum-1.png"
 								alt="Logo"
 								width={100}
 								height={100}
-								className="h-full w-full object-cover"
+								className="object-cover w-full h-full"
 							/>
 						</div>
 					</div>
@@ -72,7 +72,7 @@ export default function LoginForm() {
 							value={formState.email}
 							onChange={handleInputChange}
 							placeholder="Enter your email..."
-							className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2 text-white transition-all focus:outline-none focus:ring-1 focus:ring-gray-500"
+							className="w-full px-3 py-2 text-white transition-all border rounded-md border-zinc-700 bg-zinc-800 focus:outline-none focus:ring-1 focus:ring-gray-500"
 							required
 						/>
 					</div>
@@ -93,7 +93,7 @@ export default function LoginForm() {
 								value={formState.password}
 								onChange={handleInputChange}
 								placeholder="••••••••"
-								className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2 text-white transition-all focus:outline-none focus:ring-1 focus:ring-gray-500"
+								className="w-full px-3 py-2 text-white transition-all border rounded-md border-zinc-700 bg-zinc-800 focus:outline-none focus:ring-1 focus:ring-gray-500"
 								required
 							/>
 							<button
@@ -134,12 +134,12 @@ export default function LoginForm() {
 							<div className="w-full border-t border-gray-700"></div>
 						</div>
 						<div className="relative flex justify-center text-sm">
-							<span className="bg-body px-2 text-gray-400">Or</span>
+							<span className="px-2 text-gray-400 bg-body">Or</span>
 						</div>
 					</div>
 
 					{/* Social Logins */}
-					<div className="mx-[30px] mt-6 grid grid-cols-2 gap-[30px]">
+					<div className="mx-6 md:mx-[30px] mt-6 grid grid-cols-2 gap-4 md:gap-[30px]">
 						<button
 							type="button"
 							className="flex items-center justify-center gap-2 rounded-[10px] border border-[#D9D9D9] px-6 py-4 text-sm font-medium text-white"
@@ -149,7 +149,7 @@ export default function LoginForm() {
 								alt=""
 								height={100}
 								width={100}
-								className="h-6 w-6"
+								className="w-6 h-6"
 							/>
 							Google
 						</button>
@@ -162,7 +162,7 @@ export default function LoginForm() {
 								alt=""
 								height={100}
 								width={100}
-								className="h-6 w-6"
+								className="w-6 h-6"
 							/>
 							Apple
 						</button>
@@ -170,7 +170,7 @@ export default function LoginForm() {
 				</div>
 
 				{/* Footer */}
-				<p className="mt-8 text-center text-sm text-gray-400">
+				<p className="mt-8 text-sm text-center text-gray-400">
 					Don&apos;t have an account?{' '}
 					<Link
 						href="/signup"
@@ -189,7 +189,7 @@ export default function LoginForm() {
 						alt="Superhero illustration"
 						width={600}
 						height={800}
-						className="h-full w-full object-cover"
+						className="object-cover w-full h-full"
 						priority
 					/>
 				</div>
