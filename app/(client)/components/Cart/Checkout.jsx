@@ -4,28 +4,31 @@ import { useState } from 'react';
 
 import { Check, Minus, Plus } from 'lucide-react';
 import Image from 'next/image';
-import { randomUUID } from 'crypto';
 
 import Pagination from '../Pagination/Pagination';
 
+const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
 const Checkout = () => {
-	const [quantities, setQuantities] = useState([3, 3, 3]);
+	const [quantities, setQuantities] = useState([3, 1, 2, 1]);
 	const [useProfileDetails, setUseProfileDetails] = useState(true);
 	const [promoCode, setPromoCode] = useState('');
 	const [shippingAddress, setShippingAddress] = useState('');
 	const [email, setEmail] = useState('');
 	const [address, setAddress] = useState('');
 	const [currentPage, setCurrentPage] = useState(1);
+	const [paginatedItems, setPaginatedItems] = useState([]);
 
 	const productPrice = 120;
-	const totalItems = quantities.reduce((sum, qty) => sum + qty, 0);
-	const totalPrice = quantities.reduce(
+	const activeQuantities = quantities.filter(q => q > 0);
+	const totalItems = activeQuantities.reduce((sum, qty) => sum + qty, 0);
+	const totalPrice = activeQuantities.reduce(
 		(sum, qty) => sum + qty * productPrice,
 		0,
 	);
 
 	const decreaseQuantity = (index) => {
-		if (quantities[index] > 1) {
+		if (quantities[index] > 0) {
 			const newQuantities = [...quantities];
 			newQuantities[index] = quantities[index] - 1;
 			setQuantities(newQuantities);
@@ -55,17 +58,19 @@ const Checkout = () => {
 					{/* Left Column - Products */}
 					<div className="w-full lg:w-2/3">
 						<h2 className="mb-6 text-xl font-medium">
-							Total <span className="text-primary">3</span> products added
+							Total <span className="text-primary">{quantities.filter(q => q > 0).length}</span> products added
 						</h2>
 
 						<div className="space-y-4">
-							{quantities.map((quantity, index) => (
-								<div
-									key={randomUUID()}
-									className="flex flex-col items-start gap-4 rounded-lg border border-white/30 p-2 sm:flex-row sm:items-center"
-								>
-									<div className="flex flex-1 items-center gap-4">
-										<div className="relative h-20 w-20 overflow-hidden rounded-lg border border-white/30">
+							{quantities.map((quantity, index) => {
+								if (quantity === 0) return null;
+								return (
+									<div
+										key={crypto.randomUUID()}
+										className="flex flex-col items-start gap-4 p-2 border rounded-lg border-white/30 sm:flex-row sm:items-center"
+									>
+									<div className="flex items-center flex-1 gap-4">
+										<div className="relative w-20 h-20 overflow-hidden border rounded-lg border-white/30">
 											<Image
 												src="/assets/images/black_panther_cover2.png"
 												alt="Black Panther"
@@ -78,55 +83,57 @@ const Checkout = () => {
 											<h3 className="text-lg font-medium text-primary">
 												Black Panther
 											</h3>
-											<div className="mt-1 flex items-center gap-1">
+											<div className="flex items-center gap-1 mt-1">
 												<span className="text-primary">★</span>
 												<span className="text-sm">4.4</span>
 											</div>
-											<div className="mt-2 flex flex-wrap gap-2">
-												<span className="rounded border border-white/30 px-2 py-1 text-xs">
+											<div className="flex flex-wrap gap-2 mt-2">
+												<span className="px-2 py-1 text-xs border rounded border-white/30">
 													#action
 												</span>
-												<span className="rounded border border-white/30 px-2 py-1 text-xs">
+												<span className="px-2 py-1 text-xs border rounded border-white/30">
 													#scifi
 												</span>
-												<span className="rounded border border-white/30 px-2 py-1 text-xs">
+												<span className="px-2 py-1 text-xs border rounded border-white/30">
 													#superhero
 												</span>
 											</div>
 										</div>
 									</div>
-									<div className="ml-auto flex items-center gap-4">
+									<div className="flex items-center gap-4 ml-auto">
 										<div className="text-lg font-medium">${productPrice}</div>
 										<div className="flex items-center">
 											<button
 												onClick={() => decreaseQuantity(index)}
-												className="flex h-8 w-8 items-center justify-center rounded-md border border-white/50 text-white"
+												className="flex items-center justify-center w-8 h-8 text-white border rounded-md border-white/50"
 											>
 												<Minus size={16} />
 											</button>
-											<div className="mx-2 flex h-8 w-16 items-center justify-center rounded-md border border-white/50">
+											<div className="flex items-center justify-center w-16 h-8 mx-2 border rounded-md border-white/50">
 												{quantity}
 											</div>
 											<button
 												onClick={() => increaseQuantity(index)}
-												className="flex h-8 w-8 items-center justify-center rounded-md border border-white/50 text-white"
+												className="flex items-center justify-center w-8 h-8 text-white border rounded-md border-white/50"
 											>
 												<Plus size={16} />
 											</button>
 										</div>
 									</div>
 								</div>
-							))}
+							);
+							})}
 						</div>
 
 						{/* Pagination */}
 
 						<Pagination
-							items={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-							pageSize={3}
+							items={items}
+							pageSize={4}
+							onPageChange={setPaginatedItems}
 						/>
-						{/* <div className="mt-10 flex items-center justify-center gap-2">
-							<button className="flex items-center gap-1 rounded-full border border-white/50 px-4 py-2 text-white">
+						{/* <div className="flex items-center justify-center gap-2 mt-10">
+							<button className="flex items-center gap-1 px-4 py-2 text-white border rounded-full border-white/50">
 								<ChevronLeft size={16} />
 								Previous
 							</button>
@@ -157,7 +164,7 @@ const Checkout = () => {
 								</button>
 							))}
 
-							<button className="flex items-center gap-1 rounded-full border border-white/50 px-4 py-2 text-white">
+							<button className="flex items-center gap-1 px-4 py-2 text-white border rounded-full border-white/50">
 								Next
 								<ChevronRight size={16} />
 							</button>
@@ -167,7 +174,7 @@ const Checkout = () => {
 					{/* Right Column - Order Summary */}
 					<div className="w-full lg:w-1/3">
 						<div className="">
-							<div className="mb-6 flex items-center justify-between">
+							<div className="flex items-center justify-between mb-6">
 								<h2 className="text-xl font-medium">Order Summary</h2>
 								<div className="flex items-center gap-2">
 									<div
@@ -196,47 +203,47 @@ const Checkout = () => {
 								</div>
 
 								<div>
-									<label className="mb-2 block">Shipping</label>
+									<label className="block mb-2">Shipping</label>
 									<input
 										type="text"
 										value={shippingAddress}
 										onChange={(e) => setShippingAddress(e.target.value)}
 										placeholder="Enter shipping address"
-										className="w-full rounded-lg border border-white/50 bg-transparent p-3 text-white placeholder-white/50"
+										className="w-full p-3 text-white bg-transparent border rounded-lg border-white/50 placeholder-white/50"
 									/>
 								</div>
 
 								<div>
-									<label className="mb-2 block">Email</label>
+									<label className="block mb-2">Email</label>
 									<input
 										type="email"
 										value={email}
 										onChange={(e) => setEmail(e.target.value)}
 										placeholder="Enter your email..."
-										className="w-full rounded-lg border border-white/50 bg-transparent p-3 text-white placeholder-white/50"
+										className="w-full p-3 text-white bg-transparent border rounded-lg border-white/50 placeholder-white/50"
 									/>
 								</div>
 
 								<div>
-									<label className="mb-2 block">Adress</label>
+									<label className="block mb-2">Adress</label>
 									<input
 										type="text"
 										value={address}
 										onChange={(e) => setAddress(e.target.value)}
 										placeholder="Enter your address..."
-										className="w-full rounded-lg border border-white/50 bg-transparent p-3 text-white placeholder-white/50"
+										className="w-full p-3 text-white bg-transparent border rounded-lg border-white/50 placeholder-white/50"
 									/>
 								</div>
 
 								<div>
-									<label className="mb-2 block">Enter Promo Code</label>
+									<label className="block mb-2">Enter Promo Code</label>
 									<div className="relative">
 										<input
 											type="text"
 											value={promoCode}
 											onChange={(e) => setPromoCode(e.target.value)}
 											placeholder="Enter promo code here..."
-											className="w-full rounded-lg border border-white/50 bg-transparent p-3 pr-32 text-white placeholder-white/50"
+											className="w-full p-3 pr-32 text-white bg-transparent border rounded-lg border-white/50 placeholder-white/50"
 										/>
 										<button
 											onClick={handlePromoCode}
@@ -253,7 +260,7 @@ const Checkout = () => {
 
 								<button
 									onClick={handlePlaceOrder}
-									className="w-full rounded-lg bg-primary p-3 font-medium text-black"
+									className="w-full p-3 font-medium text-black rounded-lg bg-primary"
 								>
 									Place Order
 								</button>
