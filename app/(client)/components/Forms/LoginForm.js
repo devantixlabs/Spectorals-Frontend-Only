@@ -10,6 +10,7 @@ import { CustomCheckbox } from '../Global/CustomCheckbox';
 
 export default function LoginForm() {
 	const [showPassword, setShowPassword] = useState(false);
+	const [loginError, setLoginError] = useState(false);
 	const [formState, setFormState] = useState({
 		email: '',
 		password: '',
@@ -27,6 +28,10 @@ export default function LoginForm() {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log('Form submitted:', formState);
+		// Simulate login failure for demonstration
+		// Replace this with your actual login logic
+		// For now, we'll set loginError to true to show the forgot password link
+		setLoginError(true);
 	};
 
 	return (
@@ -117,6 +122,21 @@ export default function LoginForm() {
 							label="Remember for 30 days"
 						/>
 					</div>
+
+					{/* Login Error Message with Forgot Password Link */}
+					{loginError && (
+						<div className="p-3 text-sm border border-red-800 rounded-md bg-red-900/20">
+							<p className="text-red-400">
+								Invalid email or password.{' '}
+								<Link
+									href="/forgot-password"
+									className="font-medium text-red-300 underline transition-colors hover:text-red-200"
+								>
+									Forgot password?
+								</Link>
+							</p>
+						</div>
+					)}
 
 					{/* Submit */}
 					<button
